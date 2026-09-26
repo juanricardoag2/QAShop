@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA Shop — Tienda de práctica para QA Testing</title>
+<meta name="description" content="QA Shop: tienda web ficticia para practicar QA Manual, Testing y QA Automation.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header" data-testid="header">
+  <div class="header-inner container">
+    <a href="#inicio" class="brand" data-view-link="inicio" data-testid="brand-logo">
+      <span class="brand-mark" aria-hidden="true">◈</span>
+      <span class="brand-name">QA Shop</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal" data-testid="main-nav">
+      <button class="nav-link" data-view-link="inicio" data-testid="nav-inicio">Inicio</button>
+      <button class="nav-link" data-view-link="productos" data-testid="nav-productos">Productos</button>
+      <button class="nav-link" data-view-link="pedidos" data-testid="nav-pedidos">Pedidos</button>
+      <button class="nav-link cart-nav-link" data-view-link="carrito" data-testid="nav-carrito">
+        Carrito
+        <span class="cart-badge" id="cart-badge" data-testid="cart-badge">0</span>
+      </button>
+    </nav>
+
+    <div class="session-box" data-testid="session-box">
+      <span class="session-hello" id="session-hello" data-testid="session-hello" hidden></span>
+      <button class="btn btn-ghost" id="btn-login-open" data-view-link="login" data-testid="btn-login-open">Iniciar sesión</button>
+      <button class="btn btn-ghost" id="btn-logout" data-testid="btn-logout" hidden>Cerrar sesión</button>
+    </div>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" data-testid="nav-toggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="toast-stack" id="toast-stack" data-testid="toast-stack" aria-live="polite"></div>
+
+<main id="main">
+
+  <!-- ===================== INICIO ===================== -->
+  <section class="view is-active" id="view-inicio" data-view="inicio" data-testid="view-inicio">
+    <div class="hero container">
+      <div class="hero-copy">
+        <p class="hero-kicker">Entorno de práctica para QA</p>
+        <h1 class="hero-title">Una tienda falsa.<br>Bugs muy reales.</h1>
+        <p class="hero-lede">
+          QA Shop es una tienda electrónica ficticia construida para practicar QA Manual, diseño de
+          casos de prueba, reporte de bugs y automatización con Selenium — sin backend, sin base de
+          datos, corriendo entera en tu navegador.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-view-link="productos" data-testid="hero-cta-productos">Ver productos</button>
+          <button class="btn btn-secondary" data-view-link="login" data-testid="hero-cta-login">Iniciar sesión</button>
+        </div>
+      </div>
+
+      <div class="hero-panel" data-testid="hero-status-panel">
+        <div class="panel-head">
+          <span class="panel-dot" aria-hidden="true"></span>
+          <span class="panel-title">suite_status.log</span>
+        </div>
+        <ul class="status-list">
+          <li><span class="status-label">auth.login</span><span class="status-pill status-ok">PASS</span></li>
+          <li><span class="status-label">catalog.search</span><span class="status-pill status-ok">PASS</span></li>
+          <li><span class="status-label">cart.persist</span><span class="status-pill status-ok">PASS</span></li>
+          <li><span class="status-label">checkout.card</span><span class="status-pill status-warn">FLAKY</span></li>
+          <li><span class="status-label">orders.history</span><span class="status-pill status-ok">PASS</span></li>
+        </ul>
+        <p class="panel-footnote">8 productos · 10 casos de prueba · 0 dependencias de servidor</p>
+      </div>
+    </div>
+
+    <div class="container feature-grid">
+      <div class="feature-card">
+        <h3>Manual &amp; exploratoria</h3>
+        <p>Casos de prueba documentados en <code>/test-cases</code>, listos para ejecutar y registrar resultados.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Reporte de bugs</h3>
+        <p>Plantilla profesional en <code>/bugs</code> con severidad, prioridad, entorno y pasos de reproducción.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Automatización</h3>
+        <p>Selectores estables (<code>data-testid</code>) pensados para scripts de Selenium en <code>/automation</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRODUCTOS ===================== -->
+  <section class="view" id="view-productos" data-view="productos" data-testid="view-productos">
+    <div class="container">
+      <div class="view-heading">
+        <h2>Productos</h2>
+        <p class="view-subtitle">Explorá el catálogo y agregá artículos al carrito.</p>
+      </div>
+
+      <div class="search-bar" data-testid="search-bar">
+        <input type="search" id="search-input" placeholder="Buscar producto, ej. “mouse”…" aria-label="Buscar producto" data-testid="search-input">
+        <button class="btn btn-secondary" id="search-clear" data-testid="search-clear">Limpiar</button>
+      </div>
+      <p class="search-result-info" id="search-result-info" data-testid="search-result-info" hidden></p>
+
+      <div class="product-grid" id="product-grid" data-testid="product-grid"></div>
+      <p class="empty-state" id="products-empty" data-testid="products-empty" hidden>
+        No encontramos productos que coincidan con tu búsqueda. Probá con otro término.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== CARRITO ===================== -->
+  <section class="view" id="view-carrito" data-view="carrito" data-testid="view-carrito">
+    <div class="container">
+      <div class="view-heading">
+        <h2>Tu carrito</h2>
+        <p class="view-subtitle">Ajustá cantidades antes de pasar al checkout.</p>
+      </div>
+
+      <div class="cart-layout">
+        <div class="cart-items" id="cart-items" data-testid="cart-items"></div>
+
+        <aside class="cart-summary" data-testid="cart-summary">
+          <h3>Resumen</h3>
+          <div class="summary-row">
+            <span>Artículos</span>
+            <span id="cart-total-items" data-testid="cart-total-items">0</span>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal" data-testid="cart-subtotal">$0.00</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span id="cart-total" data-testid="cart-total">$0.00</span>
+          </div>
+          <button class="btn btn-primary btn-block" id="btn-go-checkout" data-testid="btn-go-checkout">Ir a checkout</button>
+        </aside>
+      </div>
+
+      <p class="empty-state" id="cart-empty" data-testid="cart-empty" hidden>
+        Tu carrito está vacío. <button class="link-button" data-view-link="productos">Ver productos</button>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== CHECKOUT ===================== -->
+  <section class="view" id="view-checkout" data-view="checkout" data-testid="view-checkout">
+    <div class="container checkout-layout">
+      <form class="checkout-form" id="checkout-form" data-testid="checkout-form" novalidate>
+        <div class="view-heading">
+          <h2>Checkout</h2>
+          <p class="view-subtitle">Completá tus datos para confirmar el pedido. No se realiza ningún cobro real.</p>
+        </div>
+
+        <div class="form-field">
+          <label for="checkout-name">Nombre completo</label>
+          <input type="text" id="checkout-name" name="name" data-testid="checkout-name" required>
+        </div>
+        <div class="form-field">
+          <label for="checkout-address">Dirección</label>
+          <input type="text" id="checkout-address" name="address" data-testid="checkout-address" required>
+        </div>
+        <div class="form-field">
+          <label for="checkout-city">Ciudad</label>
+          <input type="text" id="checkout-city" name="city" data-testid="checkout-city" required>
+        </div>
+        <div class="form-field">
+          <label for="checkout-card">Número de tarjeta (16 dígitos)</label>
+          <input type="text" id="checkout-card" name="card" inputmode="numeric" maxlength="19" placeholder="4111 1111 1111 1111" data-testid="checkout-card" required>
+          <span class="field-hint">Solo se valida el formato. No se procesa ningún pago real.</span>
+        </div>
+
+        <p class="form-message" id="checkout-message" data-testid="checkout-message" role="alert" hidden></p>
+
+        <button type="submit" class="btn btn-primary btn-block" data-testid="checkout-submit">Confirmar pedido</button>
+      </form>
+
+      <aside class="checkout-summary" data-testid="checkout-summary">
+        <h3>Tu pedido</h3>
+        <div id="checkout-order-lines" data-testid="checkout-order-lines"></div>
+        <div class="summary-row summary-total">
+          <span>Total</span>
+          <span id="checkout-total" data-testid="checkout-total">$0.00</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== CONFIRMACIÓN ===================== -->
+  <section class="view" id="view-confirmacion" data-view="confirmacion" data-testid="view-confirmacion">
+    <div class="container confirmation-box">
+      <div class="confirmation-icon" aria-hidden="true">✓</div>
+      <h2>Pedido confirmado</h2>
+      <p>Tu pedido <strong id="confirm-order-id" data-testid="confirm-order-id"></strong> fue registrado con éxito.</p>
+      <p class="confirmation-total">Total: <span id="confirm-order-total" data-testid="confirm-order-total"></span></p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-view-link="pedidos" data-testid="confirm-view-orders">Ver mis pedidos</button>
+        <button class="btn btn-secondary" data-view-link="productos" data-testid="confirm-continue-shopping">Seguir comprando</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PEDIDOS ===================== -->
+  <section class="view" id="view-pedidos" data-view="pedidos" data-testid="view-pedidos">
+    <div class="container">
+      <div class="view-heading">
+        <h2>Historial de pedidos</h2>
+        <p class="view-subtitle">Todos los pedidos confirmados en este navegador.</p>
+      </div>
+
+      <div class="orders-table-wrap">
+        <table class="orders-table" id="orders-table" data-testid="orders-table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Artículos</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody" data-testid="orders-tbody"></tbody>
+        </table>
+      </div>
+      <p class="empty-state" id="orders-empty" data-testid="orders-empty" hidden>
+        Todavía no hay pedidos. <button class="link-button" data-view-link="productos">Empezá a comprar</button>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== LOGIN ===================== -->
+  <section class="view" id="view-login" data-view="login" data-testid="view-login">
+    <div class="container login-layout">
+      <form class="login-form" id="login-form" data-testid="login-form" novalidate>
+        <div class="view-heading">
+          <h2>Iniciar sesión</h2>
+          <p class="view-subtitle">Usá las credenciales de prueba para acceder al checkout.</p>
+        </div>
+
+        <div class="form-field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="email" data-testid="login-email" required>
+        </div>
+        <div class="form-field">
+          <label for="login-password">Contraseña</label>
+          <input type="password" id="login-password" name="password" data-testid="login-password" required>
+        </div>
+
+        <p class="form-message" id="login-message" data-testid="login-message" role="alert" hidden></p>
+
+        <button type="submit" class="btn btn-primary btn-block" data-testid="login-submit">Ingresar</button>
+
+        <div class="credentials-hint" data-testid="credentials-hint">
+          <p class="credentials-hint-title">Credenciales de prueba</p>
+          <p><span>Email</span><code>qa.user@example.com</code></p>
+          <p><span>Contraseña</span><code>Qa12345!</code></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>QA Shop — proyecto de práctica para QA Manual, Testing y QA Automation. Sin pagos reales, sin backend.</p>
+    <p class="footer-meta">Construido con HTML, CSS y JavaScript puro · Datos persistidos en <code>localStorage</code></p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

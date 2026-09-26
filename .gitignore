@@ -1,0 +1,25 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Node / dependencias (por si más adelante se agregan tests con npm)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Python / Selenium (por si más adelante se agregan tests con pytest)
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Reportes y evidencia de pruebas
+/automation/reports/
+/automation/screenshots/
+*.log
